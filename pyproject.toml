@@ -3,9 +3,9 @@ name = "projet-ml-sea3"
 version = "0.1.0"
 description = ""
 authors = [{name = "sossou", email = "orsinimelchisedek@gmail.com"}]
+requires-python = ">=3.8"
 
 dependencies = [
-    "python>=3.8",
     "flask"
 ]
 
