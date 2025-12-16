@@ -100,12 +100,17 @@ celerybeat.pid
 
 # Environments
 .env
+.env.local
+.env.production
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Vercel
+.vercel
 
 # Spyder project settings
 .spyderproject
@@ -151,3 +156,11 @@ Thumbs.db
 *.joblib
 *.pkl
 *.pickle
+
+# Logs
+logs/
+*.log
+
+# Models (if large)
+# app/models/*.joblib
+# app/models/*.pkl

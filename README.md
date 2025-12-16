@@ -1,358 +1,253 @@
-# Application d'Analyse de Données et Machine Learning
+# 📊 Projet ML SEA3 - Application d'Analyse et Prévisions
 
-Application web interactive développée avec **Streamlit** pour l'analyse statistique de données et les prévisions avec Machine Learning.
+Application Flask complète pour l'analyse de données, tests statistiques et prévisions utilisant le machine learning.
 
-## Fonctionnalités
+## 🌟 Fonctionnalités
 
-### Chargement de données
-- Import de fichiers CSV et Excel (max 16 MB)
-- Support multi-encodage (UTF-8, Latin-1, ISO-8859-1)
-- Prévisualisation et validation automatique
-- Détection des valeurs manquantes
-- Statistiques descriptives
+- **📤 Upload de Données**: Support CSV, XLSX, XLS
+- **📊 Tests Statistiques**: Tests de stationnarité, normalité, et autres analyses
+- **🔮 Prévisions ML**: Modèles de machine learning pour prévisions temporelles
+- **📈 Visualisations**: Graphiques interactifs avec Plotly et Matplotlib
+- **🗺️ Cartographie**: Visualisation géographique avec Folium
+- **👤 Authentification**: Système de connexion sécurisé
+- **📜 Historique**: Suivi des tests et analyses effectués
+- **💹 Données Boursières**: Intégration avec Yahoo Finance
 
-### Tests statistiques
-- **Tests de normalité** : Shapiro-Wilk, Kolmogorov-Smirnov
-- **Tests de comparaison** : Test t de Student, Mann-Whitney U
-- **Tests de corrélation** : Pearson, Spearman
-- **Tests d'indépendance** : Chi-2
-- **Analyse de variance** : ANOVA
-- Sauvegarde automatique dans l'historique
+## 🚀 Démarrage Rapide
 
-### 📈 Visualisation interactive
-- Histogrammes et distributions
-- Boîtes à moustaches (Box plots)
-- Nuages de points avec ligne de tendance
-- Graphiques en ligne et en barres
-- Matrice de corrélation
-- Diagrammes circulaires
-- Graphiques personnalisables (couleurs, tailles)
+### Prérequis
 
-### 🔮 Prévisions ML
-- Chargement de modèles pré-entraînés (.joblib)
-- Génération de prévisions avec intervalles de confiance
-- Visualisation des tendances
-- Export des résultats en CSV
+- Python 3.8 ou supérieur
+- pip (gestionnaire de paquets Python)
 
-### 💹 Données boursières
-- Intégration Yahoo Finance
-- Graphiques chandelier (Candlestick)
-- Volume de transactions
-- Statistiques financières en temps réel
-- Historique personnalisable (1j à max)
+### Installation Locale
 
-### 📜 Historique
-- Sauvegarde de tous les tests effectués
-- Filtrage par type de test et fichier
-- Export CSV complet
-- Résultats détaillés avec interprétation
+1. **Cloner le repository**
+```bash
+git clone <your-repo-url>
+cd Projet-ML-SEA3
+```
 
-## 📋 Prérequis
+2. **Créer un environnement virtuel**
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
 
-- **Python 3.10+** (testé avec Python 3.13)
-- **pip** (gestionnaire de paquets Python)
-- **Connexion Internet** (pour données boursières)
+# Linux/Mac
+python3 -m venv venv
+source venv/bin/activate
+```
 
-## 🔧 Installation
+3. **Installer les dépendances**
+```bash
+pip install -r requirements.txt
+```
 
-### 1. Cloner le repository
+4. **Configurer les variables d'environnement**
+
+Créer un fichier `.env` à la racine du projet:
+```env
+# Configuration Flask
+FLASK_ENV=development
+SECRET_KEY=your-secret-key-here
+
+# Configuration Cache (optionnel)
+CACHE_TYPE=SimpleCache
+
+# APIs Boursières (optionnel)
+ALPHAVANTAGE_KEY=your-alpha-vantage-key
+IEX_CLOUD_API_KEY=your-iex-cloud-key
+
+# Logging
+LOG_LEVEL=INFO
+```
+
+5. **Lancer l'application**
+```bash
+python app.py
+```
+
+L'application sera accessible sur `http://localhost:5000`
+
+## 🌐 Déploiement sur Vercel
+
+### Configuration Vercel
+
+1. **Installer Vercel CLI** (optionnel)
+```bash
+npm i -g vercel
+```
+
+2. **Variables d'environnement Vercel**
+
+Dans votre dashboard Vercel, configurez:
+- `SECRET_KEY`: Clé secrète Flask (générer avec `python -c "import secrets; print(secrets.token_hex(32))"`)
+- `FLASK_ENV`: `production`
+- Autres variables selon vos besoins (APIs, cache, etc.)
+
+3. **Déployer**
+
+Via Vercel CLI:
+```bash
+vercel
+```
+
+Ou via GitHub:
+- Connectez votre repository à Vercel
+- Vercel détectera automatiquement la configuration
+- Le déploiement se fera automatiquement à chaque push
+
+### Structure pour Vercel
+
+```
+Projet-ML-SEA3/
+├── api/
+│   └── index.py          # Point d'entrée Vercel
+├── app/                  # Package Flask principal
+├── vercel.json          # Configuration Vercel
+├── requirements.txt     # Dépendances Python
+└── README.md
+```
+
+## 📁 Structure du Projet
+
+```
+Projet-ML-SEA3/
+├── api/                      # Vercel serverless functions
+│   └── index.py
+├── app/                      # Package Flask principal
+│   ├── auth/                # Authentification
+│   ├── blueprints/          # Modules de l'application
+│   │   ├── home/
+│   │   ├── upload/
+│   │   ├── tests/
+│   │   ├── previsions/
+│   │   ├── visualisation/
+│   │   └── cartographie/
+│   ├── models/              # Modèles de données et ML
+│   ├── services/            # Services (APIs, etc.)
+│   ├── static/              # Fichiers statiques (CSS, JS)
+│   ├── templates/           # Templates HTML
+│   ├── __init__.py          # Factory de l'app
+│   ├── config.py            # Configuration
+│   └── utils.py             # Utilitaires
+├── tests/                   # Tests unitaires
+├── scripts/                 # Scripts utilitaires
+├── app.py                   # Point d'entrée développement
+├── wsgi.py                  # Point d'entrée production (Gunicorn)
+├── requirements.txt         # Dépendances
+└── vercel.json             # Configuration Vercel
+```
+
+## 🧪 Tests
+
+Lancer les tests:
+```bash
+pytest
+```
+
+Avec couverture:
+```bash
+pytest --cov=app tests/
+```
+
+## 🔧 Configuration
+
+### Modes de Configuration
+
+- **Development**: Debug activé, cache simple
+- **Production**: Debug désactivé, sécurité renforcée, cache Redis recommandé
+- **Testing**: Configuration pour tests automatisés
+
+### Cache
+
+En développement: `SimpleCache` (en mémoire)
+En production: `Redis` recommandé
+
+Configuration Redis:
+```env
+CACHE_TYPE=Redis
+CACHE_REDIS_URL=redis://:password@host:port/db
+```
+
+### Sécurité
+
+En production, assurez-vous de:
+- Définir `SECRET_KEY` unique et sécurisée
+- Utiliser HTTPS
+- Configurer les cookies sécurisés
+- Limiter les tentatives de connexion
+
+## 📊 Utilisation
+
+1. **Upload de fichiers**: Téléchargez vos données (CSV, XLSX)
+2. **Tests statistiques**: Sélectionnez et exécutez des tests
+3. **Visualisation**: Explorez vos données graphiquement
+4. **Prévisions**: Utilisez les modèles ML pour des prévisions
+5. **Cartographie**: Visualisez vos données géographiquement
+
+## 🛠️ Technologies
+
+- **Backend**: Flask 2.2.5
+- **Base de données**: SQLAlchemy, SQLite/PostgreSQL
+- **ML**: scikit-learn, XGBoost, statsmodels
+- **Visualisation**: Plotly, Matplotlib, Folium
+- **Frontend**: HTML, CSS, JavaScript
+- **Déploiement**: Vercel, Gunicorn
+
+## 📝 Scripts Utiles
 
 ```bash
-git clone <votre-repository>
-cd Projet-ML-Sea3
+# Développement
+python app.py
+
+# Production avec Gunicorn
+gunicorn -w 4 -b 0.0.0.0:5000 wsgi:app
+
+# Tests
+pytest
+
+# Générer une clé secrète
+python -c "import secrets; print(secrets.token_hex(32))"
 ```
 
-### 2. Installer les dépendances
+## 🐛 Dépannage
 
+### Problème: Module non trouvé
 ```bash
-pip install -r requirements_streamlit.txt
+pip install -r requirements.txt
 ```
 
-**Note** : Si vous rencontrez des erreurs d'installation, utilisez :
-
+### Problème: Erreur de base de données
+Vérifiez que les dossiers nécessaires existent:
 ```bash
-python -m pip install -r requirements_streamlit.txt --user
+mkdir -p uploads logs
 ```
 
-### 3. Vérifier l'installation
-
-```bash
-python -c "import streamlit, scipy, pandas, numpy, plotly; print('✓ Installation réussie')"
+### Problème: Port déjà utilisé
+Changez le port dans `.env`:
+```env
+PORT=8000
 ```
-
-## Utilisation
-
-### Lancement local
-
-```bash
-streamlit run streamlit_app.py
-```
-
-L'application sera accessible à : **http://localhost:8501**
-
-### Navigation
-
-1. **Page d'accueil** : Vue d'ensemble et guide de démarrage
-2. **Charger des données** : Importer vos fichiers CSV/Excel
-3. **Tests statistiques** : Effectuer des analyses statistiques
-4. **Visualisation** : Créer des graphiques interactifs
-5. **Prévisions ML** : Utiliser des modèles de Machine Learning
-6. **Données boursières** : Consulter les cours en temps réel
-7. **Historique** : Consulter et exporter vos résultats
-
-## 📁 Structure du projet
-
-```
-Projet-ML-Sea3/
-├── streamlit_app.py              # Point d'entrée principal
-├── streamlit_utils.py             # Fonctions utilitaires
-├── pages/                         # Pages de l'application
-│   ├── __init__.py
-│   ├── page_accueil.py           # Page d'accueil
-│   ├── page_chargement.py        # Chargement de fichiers
-│   ├── page_tests.py             # Tests statistiques
-│   ├── page_visualisation.py     # Visualisations
-│   ├── page_previsions.py        # Prévisions ML
-│   ├── page_bourse.py            # Données boursières
-│   └── page_historique.py        # Historique des tests
-├── .streamlit/
-│   └── config.toml               # Configuration Streamlit
-├── app/
-│   └── models/                   # Modèles ML (.joblib)
-├── uploads/                      # Fichiers uploadés (temporaire)
-├── requirements_streamlit.txt    # Dépendances Python
-└── README.md                     # Ce fichier
-
-```
-
-## Exemples d'utilisation
-
-### 1. Analyser un fichier CSV
-
-```python
-# 1. Aller sur "Charger des données"
-# 2. Sélectionner votre fichier CSV
-# 3. Visualiser l'aperçu et les statistiques
-```
-
-### 2. Effectuer un test de normalité
-
-```python
-# 1. Charger vos données
-# 2. Aller sur "Tests statistiques"
-# 3. Sélectionner "Test de normalité (Shapiro-Wilk)"
-# 4. Choisir la colonne à tester
-# 5. Cliquer sur "Exécuter le test"
-```
-
-### 3. Créer une visualisation
-
-```python
-# 1. Charger vos données
-# 2. Aller sur "Visualisation"
-# 3. Sélectionner le type de graphique
-# 4. Configurer les paramètres
-# 5. Le graphique s'affiche automatiquement
-```
-
-### 4. Consulter des données boursières
-
-```python
-# 1. Aller sur "Données boursières"
-# 2. Entrer un symbole (ex: AAPL, GOOGL, MSFT)
-# 3. Choisir la période
-# 4. Cliquer sur "Charger les données"
-```
-
-## 🔒 Sécurité et confidentialité
-
-- ✅ Validation des types de fichiers
-- ✅ Limite de taille : 16 MB par fichier
-- ✅ Protection XSRF activée
-- ✅ Données stockées uniquement en session (non persistantes)
-- ⚠️ **Important** : Les données sont effacées à la fermeture du navigateur
-
-## 🚀 Déploiement sur Streamlit Cloud
-
-### Étapes
-
-1. **Créer un compte** sur [Streamlit Cloud](https://share.streamlit.io)
-
-2. **Connecter votre repository GitHub**
-
-3. **Configurer le déploiement** :
-   - Repository : Sélectionner votre repo
-   - Branch : main (ou master)
-   - Main file : `streamlit_app.py`
-
-4. **Déployer** : Cliquer sur "Deploy!"
-
-5. **Accéder à votre app** : URL fournie par Streamlit Cloud
-
-### Variables d'environnement (optionnel)
-
-Si vous utilisez des API keys, ajoutez-les dans les secrets :
-
-```toml
-# Dans Streamlit Cloud > Settings > Secrets
-ALPHAVANTAGE_KEY = "votre_clé"
-IEX_CLOUD_API_KEY = "votre_clé"
-```
-
-## 🛠️ Développement
-
-### Ajouter une nouvelle page
-
-1. Créer `pages/page_nouvelle.py` :
-
-```python
-import streamlit as st
-
-def afficher():
-    st.markdown("## Ma nouvelle page")
-    # Votre code ici
-```
-
-2. Importer dans `pages/__init__.py` :
-
-```python
-from . import page_nouvelle
-```
-
-3. Ajouter dans `streamlit_app.py` :
-
-```python
-pages = {
-    # ...
-    "🆕 Nouvelle page": "nouvelle",
-}
-
-# Dans la section d'affichage
-elif page_nom == "nouvelle":
-    from pages import page_nouvelle
-    page_nouvelle.afficher()
-```
-
-### Personnaliser le thème
-
-Modifier `.streamlit/config.toml` :
-
-```toml
-[theme]
-primaryColor = "#1f77b4"  # Couleur principale
-backgroundColor = "#ffffff"
-secondaryBackgroundColor = "#f0f2f6"
-textColor = "#262730"
-```
-
-## 📊 Formats supportés
-
-### Fichiers de données
-- **CSV** : UTF-8, Latin-1, ISO-8859-1, CP1252
-- **Excel** : .xlsx, .xls
-
-### Modèles ML
-- **Format** : .joblib (scikit-learn)
-- **Emplacement** : `app/models/`
-
-## 🐛 Résolution de problèmes
-
-### ModuleNotFoundError: No module named 'scipy'
-
-```bash
-python -m pip install scipy --user
-```
-
-### Erreur d'encodage CSV
-
-L'application teste automatiquement plusieurs encodages. Si le problème persiste, convertissez votre fichier en UTF-8.
-
-### Port déjà utilisé
-
-```bash
-streamlit run streamlit_app.py --server.port 8503
-```
-
-### Fichier trop volumineux
-
-Modifier `.streamlit/config.toml` :
-
-```toml
-[server]
-maxUploadSize = 50  # En MB
-```
-
-### L'application ne démarre pas
-
-1. Vérifier que toutes les dépendances sont installées :
-```bash
-pip install -r requirements_streamlit.txt
-```
-
-2. Vérifier la version de Python :
-```bash
-python --version  # Doit être 3.10+
-```
-
-3. Nettoyer le cache :
-```bash
-streamlit cache clear
-```
-
-## 📦 Dépendances
-
-```
-streamlit==1.40.2      # Framework web
-pandas==2.3.3          # Manipulation de données
-numpy==2.3.5           # Calculs numériques
-scipy==1.16.3          # Tests statistiques
-plotly==6.3.1          # Visualisations interactives
-yfinance==0.2.66       # Données boursières
-openpyxl==3.1.5        # Lecture Excel
-joblib==1.5.2          # Chargement de modèles
-scikit-learn==1.8.0    # Machine Learning
-matplotlib==3.10.8     # Graphiques
-```
-
-## 🤝 Contribution
-
-Les contributions sont les bienvenues ! Pour contribuer :
-
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/amelioration`)
-3. Commit vos changements (`git commit -m 'Ajout d'une fonctionnalité'`)
-4. Push vers la branche (`git push origin feature/amelioration`)
-5. Ouvrir une Pull Request
-
-## 📝 Notes importantes
-
-- Les données sont stockées **uniquement en session**
-- Pensez à **télécharger vos résultats** importants
-- L'historique est **effacé à la fermeture** du navigateur
-- Les modèles ML doivent être au format **.joblib**
-- Les fichiers uploadés sont **temporaires**
-
-## 📞 Support
-
-Pour toute question ou problème :
-
-1. Consulter ce README
-2. Vérifier les [Issues GitHub](https://github.com/votre-repo/issues)
-3. Ouvrir une nouvelle issue si nécessaire
 
 ## 📄 Licence
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+[Votre licence ici]
 
-## 🎓 Crédits
+## 👥 Auteurs
 
-Développé avec ❤️ en utilisant :
-- [Streamlit](https://streamlit.io) - Framework web
-- [Plotly](https://plotly.com) - Visualisations
-- [Yahoo Finance](https://finance.yahoo.com) - Données boursières
-- [scikit-learn](https://scikit-learn.org) - Machine Learning
+- Sossou Melchisedek (orsinimelchisedek@gmail.com)
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues! N'hésitez pas à ouvrir une issue ou un pull request.
 
 ---
 
-**Version** : 2.0 - Streamlit  
-**Dernière mise à jour** : Décembre 2025
+**Note**: Pour la production, n'oubliez pas de:
+- Configurer les variables d'environnement
+- Utiliser une base de données production (PostgreSQL)
+- Configurer Redis pour le cache
+- Activer HTTPS
+- Configurer les sauvegardes
